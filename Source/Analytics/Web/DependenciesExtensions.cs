@@ -8,11 +8,14 @@ using Read.KPI;
 using Read.HealthRisks;
 using Read.DataCollectors;
 using Read.Alerts;
+using Web.Dolittle;
 
 namespace Web
 {
     public static class DependenciesExtensions
     {
+        static IContainer _container;
+
         public static AutofacServiceProvider RegisterDependencies(this IServiceCollection services)
         {
             var containerBuilder = new ContainerBuilder();
@@ -25,8 +28,11 @@ namespace Web
             containerBuilder.RegisterType<AlertEventHandler>().As<IAlertEventHandler>();
             containerBuilder.Populate(services);
 
-            var container = containerBuilder.Build();
-            return new AutofacServiceProvider(container);
+            containerBuilder.Register(_ => _container);
+            containerBuilder.AddDolittle();
+
+            _container = containerBuilder.Build();
+            return new AutofacServiceProvider(_container);
         }
     }
 }

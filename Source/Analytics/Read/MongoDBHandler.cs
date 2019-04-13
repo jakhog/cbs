@@ -6,20 +6,11 @@ namespace Read
     //TODO: ADD ERROR HANDLING & REPORTING BACK TO CALLER
     public class MongoDBHandler
     {
-        private readonly string connectionString = "mongodb://localhost";
-        private readonly string databaseName = "read_model_database";
-        private readonly IMongoDatabase _mongoDatabase;
+        readonly IMongoCollectionFactory _mongoCollectionFactory;
 
-        public MongoDBHandler()
+        public MongoDBHandler(IMongoCollectionFactory mongoCollectionFactory)
         {
-            _mongoDatabase = SetupDataBase();
-        }
-
-        public MongoDBHandler(string connectionString, string databaseName)
-        {
-            this.connectionString = connectionString;
-            this.databaseName = databaseName;
-            _mongoDatabase = SetupDataBase();
+            _mongoCollectionFactory = mongoCollectionFactory;
         }
         
         /**
@@ -27,7 +18,7 @@ namespace Read
         */
         public IQueryable<T> GetQueryable<T>() where T : BaseReadModel
         {
-            var collection = _mongoDatabase.GetCollection<T>(typeof(T).Name);
+            var collection = _mongoCollectionFactory.GetCollection<T>(typeof(T).Name);
             return collection.AsQueryable();
         }
 
@@ -36,7 +27,7 @@ namespace Read
          */
         public void Insert<T>(T record) where T : BaseReadModel
         {
-            var collection = _mongoDatabase.GetCollection<T>(typeof(T).Name);
+            var collection = _mongoCollectionFactory.GetCollection<T>(typeof(T).Name);
             collection.InsertOneAsync(record);
         }
 
@@ -46,27 +37,13 @@ namespace Read
         public void Update<T>(T record) where T : BaseReadModel
         {
             //Get collection associated with this object
-            var collection = _mongoDatabase.GetCollection<T>(typeof(T).Name);
+            var collection = _mongoCollectionFactory.GetCollection<T>(typeof(T).Name);
 
             //Create filter to get element to update
             var filter = Builders<T>.Filter.Eq("_id", record.Id);
 
             //Replace DB element with updated element
             collection.ReplaceOne(filter, record, new UpdateOptions() { IsUpsert = false });
-        }
-
-        /*
-         * gets an object of the databaseName using class level connectionstring & dbName
-         */
-        private IMongoDatabase SetupDataBase()
-        {
-            // Create a MongoClient object by using the connection string
-            var client = new MongoClient(this.connectionString);
-
-            //Use the MongoClient to access the server
-            IMongoDatabase database = client.GetDatabase(this.databaseName);
-
-            return database;
         }
     }
 }
