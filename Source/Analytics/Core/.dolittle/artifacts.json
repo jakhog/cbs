@@ -1,1 +1,38 @@
-{}
+{
+  "253ed092-ba8f-4583-9a8c-f0475773df5f": {
+    "commands": {},
+    "events": {
+      "51b2c376-ce2b-4d49-a86c-e654e50248c9": {
+        "generation": 1,
+        "type": "Events.Admin.HealthRisks.HealthRiskCreated, Events.Admin"
+      }
+    },
+    "eventSources": {},
+    "readModels": {},
+    "queries": {}
+  },
+  "5603bfb2-cd53-41bf-8889-3190d5e009a1": {
+    "commands": {},
+    "events": {
+      "58a3dbf3-bcd0-4722-b21b-65d06558df53": {
+        "generation": 1,
+        "type": "Events.Reporting.Reporting.CaseReports.CaseReportReceived, Events.Reporting"
+      }
+    },
+    "eventSources": {},
+    "readModels": {},
+    "queries": {}
+  },
+  "8ba343e5-dfbc-4fad-8361-301272ce634a": {
+    "commands": {},
+    "events": {
+      "899f24ac-860d-4dae-ae90-938ac12e5226": {
+        "generation": 1,
+        "type": "Events.Reporting.Management.DataCollectors.Registration.DataCollectorRegistered, Events.Reporting"
+      }
+    },
+    "eventSources": {},
+    "readModels": {},
+    "queries": {}
+  }
+}

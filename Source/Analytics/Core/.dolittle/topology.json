@@ -1,4 +1,42 @@
 {
   "modules": {},
-  "features": {}
+  "features": {
+    "51e1ae03-1ea1-4b03-a5ae-5e5cdf8d1c6b": {
+      "name": "Admin",
+      "subFeatures": {
+        "253ed092-ba8f-4583-9a8c-f0475773df5f": {
+          "name": "HealthRisks",
+          "subFeatures": {}
+        }
+      }
+    },
+    "d851a33d-ee60-4d6f-9bac-0a461df11d5e": {
+      "name": "Reporting",
+      "subFeatures": {
+        "df8c9281-e0c0-4101-9cae-78557cd35b71": {
+          "name": "Reporting",
+          "subFeatures": {
+            "5603bfb2-cd53-41bf-8889-3190d5e009a1": {
+              "name": "CaseReports",
+              "subFeatures": {}
+            }
+          }
+        },
+        "d228d036-0fa1-489f-8f21-40fa3dcad212": {
+          "name": "Management",
+          "subFeatures": {
+            "54a3da2e-8b10-441a-afaf-cfbf22455a37": {
+              "name": "DataCollectors",
+              "subFeatures": {
+                "8ba343e5-dfbc-4fad-8361-301272ce634a": {
+                  "name": "Registration",
+                  "subFeatures": {}
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }
